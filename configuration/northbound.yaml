@@ -167,18 +167,18 @@ northbound:
 
     components:
       schemas:
-        Resource:
+        Project:
           type: object
           properties:
             id:
               type: string
-              example: "resource-1234"
+              example: "project-1234"
             name:
               type: string
-              example: "Nuevo Recurso"
+              example: "Nuevo Proyecto"
             description:
               type: string
-              example: "Descripción detallada del recurso"
+              example: "Descripción detallada del proyecto"
             start_date:
               type: string
               format: date
@@ -192,20 +192,19 @@ northbound:
               enum: [active, completed, on_hold]
               example: "active"
 
-        NewResource:
+        NewProject:
           type: object
           required:
             - name
-            - start_date
-            - end_date
-            - status
+            - startDate
+            - endDate
           properties:
             name:
               type: string
-              example: "Nuevo Recurso"
+              example: "Nuevo Proyecto"
             description:
               type: string
-              example: "Descripción detallada del recurso"
+              example: "Descripción detallada del proyecto"
             start_date:
               type: string
               format: date
@@ -225,7 +224,7 @@ northbound:
             id:
               type: string
               example: "task-5678"
-            title:
+            name:
               type: string
               example: "Implementar API"
             description:
@@ -247,7 +246,7 @@ northbound:
           type: object
           required:
             - title
-            - resource_id
+            - projectId
           properties:
             title:
               type: string
@@ -257,7 +256,7 @@ northbound:
               example: "Desarrollar el endpoint para obtener lista de proyectos"
             resource_id:
               type: string
-              example: "resource-1234"
+              example: "project-1234"
             assigned_to:
               type: string
               example: "user-1234"
@@ -280,6 +279,7 @@ northbound:
               items:
                 type: string
               example: ["El campo 'name' es requerido"]
+
       responses:
         Unauthorized:
           description: Error de autenticación
