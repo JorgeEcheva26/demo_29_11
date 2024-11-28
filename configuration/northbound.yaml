@@ -8,7 +8,7 @@ northbound:
     capif_register_port: "36211"
     capif_username: "echeva_0"
     capif_password: "echevapass"
-    debug_mode: "False"
+    debug_mode: "True"
     provider:
       cert_generation:
         csr_common_name: "provider"
