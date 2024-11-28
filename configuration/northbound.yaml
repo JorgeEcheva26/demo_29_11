@@ -167,23 +167,23 @@ northbound:
 
     components:
       schemas:
-        Project:
+        Resource:
           type: object
           properties:
             id:
               type: string
-              example: "project-1234"
+              example: "resource-1234"
             name:
               type: string
-              example: "Nuevo Proyecto"
+              example: "Nuevo Recurso"
             description:
               type: string
-              example: "Descripción detallada del proyecto"
-            startDate:
+              example: "Descripción detallada del recurso"
+            start_date:
               type: string
               format: date
               example: "2024-01-01"
-            endDate:
+            end_date:
               type: string
               format: date
               example: "2024-12-31"
@@ -192,24 +192,25 @@ northbound:
               enum: [active, completed, on_hold]
               example: "active"
 
-        NewProject:
+        NewResource:
           type: object
           required:
             - name
-            - startDate
-            - endDate
+            - start_date
+            - end_date
+            - status
           properties:
             name:
               type: string
-              example: "Nuevo Proyecto"
+              example: "Nuevo Recurso"
             description:
               type: string
-              example: "Descripción detallada del proyecto"
-            startDate:
+              example: "Descripción detallada del recurso"
+            start_date:
               type: string
               format: date
               example: "2024-01-01"
-            endDate:
+            end_date:
               type: string
               format: date
               example: "2024-12-31"
@@ -230,10 +231,10 @@ northbound:
             description:
               type: string
               example: "Desarrollar el endpoint para obtener lista de proyectos"
-            assignedTo:
+            assigned_to:
               type: string
               example: "user-1234"
-            dueDate:
+            due_date:
               type: string
               format: date
               example: "2024-06-30"
@@ -246,7 +247,7 @@ northbound:
           type: object
           required:
             - title
-            - projectId
+            - resource_id
           properties:
             title:
               type: string
@@ -254,13 +255,13 @@ northbound:
             description:
               type: string
               example: "Desarrollar el endpoint para obtener lista de proyectos"
-            projectId:
+            resource_id:
               type: string
-              example: "project-1234"
-            assignedTo:
+              example: "resource-1234"
+            assigned_to:
               type: string
               example: "user-1234"
-            dueDate:
+            due_date:
               type: string
               format: date
               example: "2024-06-30"
@@ -279,7 +280,6 @@ northbound:
               items:
                 type: string
               example: ["El campo 'name' es requerido"]
-
       responses:
         Unauthorized:
           description: Error de autenticación
