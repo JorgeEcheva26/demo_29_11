@@ -189,15 +189,14 @@ northbound:
               example: "2024-12-31"
             status:
               type: string
-              enum: [active, completed, on_hold]
               example: "active"
 
         NewProject:
           type: object
           required:
             - name
-            - startDate
-            - endDate
+            - start_date
+            - end_date
           properties:
             name:
               type: string
@@ -215,7 +214,6 @@ northbound:
               example: "2024-12-31"
             status:
               type: string
-              enum: [active, completed, on_hold]
               example: "active"
 
         Task:
@@ -239,14 +237,13 @@ northbound:
               example: "2024-06-30"
             status:
               type: string
-              enum: [pending, in_progress, completed]
               example: "pending"
 
         NewTask:
           type: object
           required:
             - title
-            - projectId
+            - resource_id
           properties:
             title:
               type: string
