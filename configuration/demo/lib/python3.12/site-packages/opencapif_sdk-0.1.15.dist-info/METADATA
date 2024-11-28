@@ -1,0 +1,451 @@
+Metadata-Version: 2.1
+Name: opencapif_sdk
+Version: 0.1.15
+Summary: This repository develops a Python Software Development Kit(SDK) which focuses on connecting to OpenCAPIF (Common API Framework for 3GPP Northbound APIs) in a simple way, lowering integration complexity and allowing developers to focus on Network Applications (Network Apps) or services development.
+Author-email: JorgeEcheva <jorge.echevarriauribarri.practicas@telefonica.com>, dgs-cgm <daniel.garciasanchez@telefonica.com>
+License: Apache License
+                                   Version 2.0, January 2004
+                                http://www.apache.org/licenses/
+        
+           TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION
+        
+           1. Definitions.
+        
+              "License" shall mean the terms and conditions for use, reproduction,
+              and distribution as defined by Sections 1 through 9 of this document.
+        
+              "Licensor" shall mean the copyright owner or entity authorized by
+              the copyright owner that is granting the License.
+        
+              "Legal Entity" shall mean the union of the acting entity and all
+              other entities that control, are controlled by, or are under common
+              control with that entity. For the purposes of this definition,
+              "control" means (i) the power, direct or indirect, to cause the
+              direction or management of such entity, whether by contract or
+              otherwise, or (ii) ownership of fifty percent (50%) or more of the
+              outstanding shares, or (iii) beneficial ownership of such entity.
+        
+              "You" (or "Your") shall mean an individual or Legal Entity
+              exercising permissions granted by this License.
+        
+              "Source" form shall mean the preferred form for making modifications,
+              including but not limited to software source code, documentation
+              source, and configuration files.
+        
+              "Object" form shall mean any form resulting from mechanical
+              transformation or translation of a Source form, including but
+              not limited to compiled object code, generated documentation,
+              and conversions to other media types.
+        
+              "Work" shall mean the work of authorship, whether in Source or
+              Object form, made available under the License, as indicated by a
+              copyright notice that is included in or attached to the work
+              (an example is provided in the Appendix below).
+        
+              "Derivative Works" shall mean any work, whether in Source or Object
+              form, that is based on (or derived from) the Work and for which the
+              editorial revisions, annotations, elaborations, or other modifications
+              represent, as a whole, an original work of authorship. For the purposes
+              of this License, Derivative Works shall not include works that remain
+              separable from, or merely link (or bind by name) to the interfaces of,
+              the Work and Derivative Works thereof.
+        
+              "Contribution" shall mean any work of authorship, including
+              the original version of the Work and any modifications or additions
+              to that Work or Derivative Works thereof, that is intentionally
+              submitted to Licensor for inclusion in the Work by the copyright owner
+              or by an individual or Legal Entity authorized to submit on behalf of
+              the copyright owner. For the purposes of this definition, "submitted"
+              means any form of electronic, verbal, or written communication sent
+              to the Licensor or its representatives, including but not limited to
+              communication on electronic mailing lists, source code control systems,
+              and issue tracking systems that are managed by, or on behalf of, the
+              Licensor for the purpose of discussing and improving the Work, but
+              excluding communication that is conspicuously marked or otherwise
+              designated in writing by the copyright owner as "Not a Contribution."
+        
+              "Contributor" shall mean Licensor and any individual or Legal Entity
+              on behalf of whom a Contribution has been received by Licensor and
+              subsequently incorporated within the Work.
+        
+           2. Grant of Copyright License. Subject to the terms and conditions of
+              this License, each Contributor hereby grants to You a perpetual,
+              worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+              copyright license to reproduce, prepare Derivative Works of,
+              publicly display, publicly perform, sublicense, and distribute the
+              Work and such Derivative Works in Source or Object form.
+        
+           3. Grant of Patent License. Subject to the terms and conditions of
+              this License, each Contributor hereby grants to You a perpetual,
+              worldwide, non-exclusive, no-charge, royalty-free, irrevocable
+              (except as stated in this section) patent license to make, have made,
+              use, offer to sell, sell, import, and otherwise transfer the Work,
+              where such license applies only to those patent claims licensable
+              by such Contributor that are necessarily infringed by their
+              Contribution(s) alone or by combination of their Contribution(s)
+              with the Work to which such Contribution(s) was submitted. If You
+              institute patent litigation against any entity (including a
+              cross-claim or counterclaim in a lawsuit) alleging that the Work
+              or a Contribution incorporated within the Work constitutes direct
+              or contributory patent infringement, then any patent licenses
+              granted to You under this License for that Work shall terminate
+              as of the date such litigation is filed.
+        
+           4. Redistribution. You may reproduce and distribute copies of the
+              Work or Derivative Works thereof in any medium, with or without
+              modifications, and in Source or Object form, provided that You
+              meet the following conditions:
+        
+              (a) You must give any other recipients of the Work or
+                  Derivative Works a copy of this License; and
+        
+              (b) You must cause any modified files to carry prominent notices
+                  stating that You changed the files; and
+        
+              (c) You must retain, in the Source form of any Derivative Works
+                  that You distribute, all copyright, patent, trademark, and
+                  attribution notices from the Source form of the Work,
+                  excluding those notices that do not pertain to any part of
+                  the Derivative Works; and
+        
+              (d) If the Work includes a "NOTICE" text file as part of its
+                  distribution, then any Derivative Works that You distribute must
+                  include a readable copy of the attribution notices contained
+                  within such NOTICE file, excluding those notices that do not
+                  pertain to any part of the Derivative Works, in at least one
+                  of the following places: within a NOTICE text file distributed
+                  as part of the Derivative Works; within the Source form or
+                  documentation, if provided along with the Derivative Works; or,
+                  within a display generated by the Derivative Works, if and
+                  wherever such third-party notices normally appear. The contents
+                  of the NOTICE file are for informational purposes only and
+                  do not modify the License. You may add Your own attribution
+                  notices within Derivative Works that You distribute, alongside
+                  or as an addendum to the NOTICE text from the Work, provided
+                  that such additional attribution notices cannot be construed
+                  as modifying the License.
+        
+              You may add Your own copyright statement to Your modifications and
+              may provide additional or different license terms and conditions
+              for use, reproduction, or distribution of Your modifications, or
+              for any such Derivative Works as a whole, provided Your use,
+              reproduction, and distribution of the Work otherwise complies with
+              the conditions stated in this License.
+        
+           5. Submission of Contributions. Unless You explicitly state otherwise,
+              any Contribution intentionally submitted for inclusion in the Work
+              by You to the Licensor shall be under the terms and conditions of
+              this License, without any additional terms or conditions.
+              Notwithstanding the above, nothing herein shall supersede or modify
+              the terms of any separate license agreement you may have executed
+              with Licensor regarding such Contributions.
+        
+           6. Trademarks. This License does not grant permission to use the trade
+              names, trademarks, service marks, or product names of the Licensor,
+              except as required for reasonable and customary use in describing the
+              origin of the Work and reproducing the content of the NOTICE file.
+        
+           7. Disclaimer of Warranty. Unless required by applicable law or
+              agreed to in writing, Licensor provides the Work (and each
+              Contributor provides its Contributions) on an "AS IS" BASIS,
+              WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or
+              implied, including, without limitation, any warranties or conditions
+              of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A
+              PARTICULAR PURPOSE. You are solely responsible for determining the
+              appropriateness of using or redistributing the Work and assume any
+              risks associated with Your exercise of permissions under this License.
+        
+           8. Limitation of Liability. In no event and under no legal theory,
+              whether in tort (including negligence), contract, or otherwise,
+              unless required by applicable law (such as deliberate and grossly
+              negligent acts) or agreed to in writing, shall any Contributor be
+              liable to You for damages, including any direct, indirect, special,
+              incidental, or consequential damages of any character arising as a
+              result of this License or out of the use or inability to use the
+              Work (including but not limited to damages for loss of goodwill,
+              work stoppage, computer failure or malfunction, or any and all
+              other commercial damages or losses), even if such Contributor
+              has been advised of the possibility of such damages.
+        
+           9. Accepting Warranty or Additional Liability. While redistributing
+              the Work or Derivative Works thereof, You may choose to offer,
+              and charge a fee for, acceptance of support, warranty, indemnity,
+              or other liability obligations and/or rights consistent with this
+              License. However, in accepting such obligations, You may act only
+              on Your own behalf and on Your sole responsibility, not on behalf
+              of any other Contributor, and only if You agree to indemnify,
+              defend, and hold each Contributor harmless for any liability
+              incurred by, or claims asserted against, such Contributor by reason
+              of your accepting any such warranty or additional liability.
+        
+           END OF TERMS AND CONDITIONS
+        
+           APPENDIX: How to apply the Apache License to your work.
+        
+              To apply the Apache License to your work, attach the following
+              boilerplate notice, with the fields enclosed by brackets "[]"
+              replaced with your own identifying information. (Don't include
+              the brackets!)  The text should be enclosed in the appropriate
+              comment syntax for the file format. We also recommend that a
+              file or class name and description of purpose be included on the
+              same "printed page" as the copyright notice for easier
+              identification within third-party archives.
+        
+           Copyright 2022 Telefónica Innovación Digital, Fogus Innovations & Services P.C. and ETSI.
+           Copyright (c) 2021, Stavros Kolometsos
+        
+           Licensed under the Apache License, Version 2.0 (the "License");
+           you may not use this file except in compliance with the License.
+           You may obtain a copy of the License at
+        
+               http://www.apache.org/licenses/LICENSE-2.0
+        
+           Unless required by applicable law or agreed to in writing, software
+           distributed under the License is distributed on an "AS IS" BASIS,
+           WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+           See the License for the specific language governing permissions and
+           limitations under the License.
+        
+Project-URL: Homepage, https://github.com/Telefonica/pesp_capif_sdk
+Keywords: pesp_capif_sdk,capif,sdk capif,opencapif_sdk
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests==2.32.3
+Requires-Dist: PyYAML==6.0.1
+Requires-Dist: cryptography==38.0.4
+Requires-Dist: pyOpenSSL==22.1.0
+Requires-Dist: urllib3==2.2.2
+Requires-Dist: certifi==2024.7.4
+Requires-Dist: idna==3.7
+Requires-Dist: Flask==3.0.3
+Requires-Dist: Flask-JWT-Extended==4.6.0
+Requires-Dist: Jinja2==3.1.4
+Requires-Dist: MarkupSafe==2.1.5
+Requires-Dist: six==1.16.0
+Requires-Dist: typing-extensions>=4.8.0
+Requires-Dist: Werkzeug==3.0.4
+Requires-Dist: pytest==8.3.2
+Requires-Dist: flake8==3.9.2
+Requires-Dist: coverage==4.5.4
+Requires-Dist: mccabe==0.6.1
+Requires-Dist: pycodestyle==2.7.0
+Requires-Dist: pyflakes==2.3.1
+Requires-Dist: python-dateutil==2.9.0.post0
+Requires-Dist: jinja2-time==0.2.0
+Requires-Dist: text-unidecode==1.3
+Requires-Dist: binaryornot==0.4.4
+
+# OpenCAPIF SDK
+
+This repository develops a Python Software Development Kit(SDK) which focuses on connecting to OpenCAPIF (Common API Framework for 3GPP Northbound APIs) in a simple way, lowering integration complexity and allowing developers to focus on Network Applications (Network Apps) or services development. 
+
+OpenCAPIF SDK provides a set of libraries to enable either CAPIF provider and invoker roles, and other functions to simplify procedures calls towards OpenCAPIF entity.
+
+Current version of OpenCAPIF SDK is compatible with following publicly available releases:
+- [OpenCAPIF Release 1.0](https://ocf.etsi.org/documentation/v1.0.0-release/)
+- OpenCAPIF Release 2.0
+
+# Network App developers
+
+In the scope of CAPIF, a Network App (Network Application) refers to an external application or service that interacts with the 3GPP network via standardized APIs. These Network Apps typically leverage the capabilities and services provided by the underlying mobile network infrastructure, such as network slicing, quality of service (QoS), or location services.
+
+Network Apps can be developed by third-party service providers, network operators, or other stakeholders to offer a wide range of services, including enhanced communication features, IoT solutions, or content delivery, and they use CAPIF as the unified framework for securely discovering, accessing, and utilizing 3GPP network APIs.
+
+For that purpose Network Apps play 2 different roles when interacting with CAPIF:
+- **Invoker**: a Network App acting as an Invoker is responsible for consuming APIs exposed by other services. This role represents an external application or service that  calls the 3GPP northbound APIs to utilize the network’s functionalities.
+
+- **Provider**: a Network App acting as a Provider is responsible for exposing its own APIs/services for use by Invokers. This role represents an entity that offers services through APIs, making them available to other external applications or Invokers.A provider also is distinguished for having three parts.
+
+  - The **AMF (API Management Function)**, supplies the API provider domain with administrative capabilities. Some of these capabilities include, auditing the service API invocation logs received from the CCF, on-boarding/off-boarding new API invokers and monitoring the status of the service APIs.One provider can have only one AMF.
+
+  - The **APF (API Publishing Function)**, is responsible for the publication of the service APIs to CCF in order to enable the discovery capability to the API Invokers.One provider can have multiple APFs.
+
+  - The **AEF (API Exposing Function)**, is responsible for the exposure of the service APIs. Assuming that API Invokers are authorized by the CCF, AEF validates the authorization and subsequently provides the direct communication entry points to the service APIs. AEF may also authorize API invokers and record the invocations in log files.One provider can have multiple AEFs
+
+OpenCAPIF SDK brings a set of functions to integrate with the 5G Core's function CAPIF, as defined in [3GPP Technical Specification (TS) 29.222 V18.5.0 Common API Framework for 3GPP Northbound APIs](https://www.etsi.org/deliver/etsi_ts/129200_129299/129222/18.05.00_60/ts_129222v180500p.pdf). This section shows the mapping between the Python functions available in this SDK and the CAPIF OpenAPI APIs defined the reference standard:
+
+| **3GPP CAPIF API**                                    | **OpenCAPIF SDK function**                                  | **Description**                                             |
+|-------------------------------------------------------|-------------------------------------------------------------|-------------------------------------------------------------|
+| /onboardedInvokers (POST)                             | [onboard_invoker()](./doc/sdk_full_documentation.md#invoker-onboarding)                                           | Registers a new invoker.                                    |
+| /onboardedInvokers/{onboardingId} (PUT)               | [update_invoker()](./doc/sdk_full_documentation.md#update-and-offboard-invoker)                                          | Updates an existing invoker for a specific `onboardingId`.                                |
+| /onboardedInvokers/{onboardingId} (DELETE)            | [offboard_invoker()](./doc/sdk_full_documentation.md#update-and-offboard-invoker)                                         | Deletes an invoker for a specific `onboardingId`.                                         |
+| registrations (POST)                                  | [onboard_provider()](./doc/sdk_full_documentation.md#provider-onboarding)                                          | Registers a new service provider.                           |
+| /registrations/{registrationId} (PUT)                 | [update_provider()](./doc/sdk_full_documentation.md#update-and-offboard-provider)                                           | Updates a service provider's registration for a specific `registrationId`.                  |
+| /registrations/{registrationId} (DELETE)              | [offboard_provider()](./doc/sdk_full_documentation.md#update-and-offboard-provider)                                         | Deletes a service provider's registration for a specific `registrationId`.                  |
+| /allServiceAPIs (GET)                                 | [discover()](./doc/sdk_full_documentation.md#discover-process)                                                  | Retrieves a list of all available service APIs.             |
+| /trustedInvokers (PUT//POST)                          | [get_tokens()](./doc/sdk_full_documentation.md#discover-process)                                                  | Registers or updates trusted invokers.                      |
+| /securities/{securityId}/token (GET)                  | [get_tokens()](./doc/sdk_full_documentation.md#obtain-invoker-tokens)                                                | Retrieves a security token for a specific `securityId`. This JWT token is used to query the targeted services.      |
+| /{apfId}/service-apis(POST)                           | [publish_services()](./doc/sdk_full_documentation.md#services-publishing)                                          | Registers a new service API into the system for a specific `apfId`                |
+| /{apfId}/service-apis/{serviceApiId} (DELETE)         | [unpublish_service()](./doc/sdk_full_documentation.md#services-deletion)                                         | Deletes a service API from the system for a specific `apfId`and `serviceApiId`                      |
+| /{apfId}/service-apis/{serviceApiId} (PUT)            | [update_service()](./doc/sdk_full_documentation.md#services-update)                                            | Updates the details of an existing service API for a specific `apfId`and `serviceApiId`             |
+| /{apfId}/service-apis/{serviceApiId} (GET)                           | [get_service()](./doc/sdk_full_documentation.md#get-services)                                               | Retrieves the details of a specific service API for a specific `apfId` and `serviceApiId`           |
+| /{apfId}/service-apis (GET)            | [get_all_services()](./doc/sdk_full_documentation.md#get-all-services)                                          | Retrieves a list of all available service APIs for a specific `apfId`            |
+| /aef-security/v1/check-authentication (POST)            | [check_authentication()](./doc/sdk_full_documentation.md#check_authentication)                                          | This custom operation allows the API invoker to confirm the `supported_features` from the API exposing function(AEF)            |
+
+NOTE: Above mentioned CAPIF APIs are defined in these 3GPP references:
+- [CAPIF Invoker API specification](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_API_Invoker_Management_API.yaml)
+- [CAPIF Provider API specification](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_API_Provider_Management_API.yaml)
+- [CAPIF Discover API specification](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Discover_Service_API.yaml)
+- [CAPIF Publish API specification](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Publish_Service_API.yaml) 
+- [CAPIF Security API specification](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Security_API.yaml)
+- [AEF Security API specification](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_AEF_Security_API.yaml)
+
+NOTE: In the [3GPP Technical Specification (TS) 29.222 V18.5.0 Common API Framework for 3GPP Northbound APIs](https://www.etsi.org/deliver/etsi_ts/129200_129299/129222/18.05.00_60/ts_129222v180500p.pdf) the `service` concept is understood as equal as the `API` concept.
+
+
+## OpenCAPIF SDK requirements
+
+To use the OpenCAPIF SDK, a registered user account within the target CAPIF instance is required. 
+
+**Contact the administrator to obtain the required predefined credentials (CAPIF username and password).**
+
+## OpenCAPIF SDK installation
+
+To use the SDK, binary installer for the latest version is available at the [Python Package Index (Pipy)](https://pypi.org/project/opencapif-sdk/)
+
+```console
+pip install opencapif_sdk
+```
+## Configuration via `capif_sdk_config.json`
+
+### Common Fields for Invoker and Provider
+
+Regardless of the role (Invoker or Provider), the following fields are mandatory:
+
+- `capif_host`
+- `register_host`
+- `capif_https_port`
+- `capif_register_port`
+- `capif_username`
+- `capif_password`
+- `debug_mode`
+
+### Network App Invoker
+
+When configuring the SDK as a **Network App Invoker**, the following fields must be provided:
+
+- `invoker_folder`
+- `capif_callback_url`
+- `supported_features`
+- `cert_generation` (fields such as `csr_common_name`, `csr_country_name`, etc.)
+
+**Optional:**
+- `discover_filter`: useful to enable the discovery of specific APIs. Some fields under `discover_filter` structure required to be configured when using discovery filters. Check devoted section below,
+- `check_authentication_data`: useful to use `check_authentication()` function to validate features from a target provider, it will be required to fill up the `ip` and `port` parameters within the `check_authentication_data` variable.
+
+### Network App Provider
+
+For SDK configuration as a **Network App Provider**, the following fields are required:
+
+- `provider_folder`
+- `cert_generation` (fields such as `csr_common_name`, `csr_country_name`, etc.)
+- `APFs`
+- `AEFs`
+- `publish_req`
+- `api_description_path`
+
+## Configuration of `discover_filter`
+
+The `discover_filter` section adheres to the parameters defined in the GET request schema of the [Discover Services API](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Discover_Service_API.yaml).
+
+To use the service discovery functionality, the `discover_filter` fields should be populated with the desired filters. **It is important to note that fields such as `api-name` must contain only one entry of each type (i.e., no lists are allowed in api-name).**
+
+For instance if the invoker fill the `api-name` field, the `discover()` functionality will retrieve only one API, the one that matches the exact name of the `api-name`.
+
+Before running the Invoker Service Discovery Functionality, the Invoker must be onboarded to CAPIF.
+
+## Configuration of `publish_req`
+
+This section is mandatory when using the [CAPIF Publish Service API](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Publish_Service_API.yaml). The following fields are required:
+
+- `service_api_id`: Example: `"02eff6e1b3a8f7c8044a92ee8a30bd"`
+- `publisher_apf_id`: Example: `"APFa165364a379035d14311deadc04332"`
+- `publisher_aefs_ids`: An array of selected AEF IDs. Example: `["AEFfa38f0e855bffb420e4994ecbc8fb9", "AEFe8bfa711f4f0c95ba0b382508e6382"]`
+
+The `api_description_path` must point to the Publish API to be shared, and it should follow the [ServiceAPIDescription](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Publish_Service_API.yaml) schema.
+
+To obtain this schema, opencapif_sdk has a facility to translate Openapi structures to ServiceAPIDescription schemas.
+
+If the `publisher_aefs_ids` do not match the `aefProfiles` in the API description, an error will be raised by the SDK.
+
+## Descriptions of `capif_sdk_config` Fields
+
+This file can also be populated using [environment variables](../samples/enviroment_variables_sample.txt).
+
+- `invoker_folder`: The path (relative or absolute) where invoker information (certificates, keys, etc.) is stored.
+- `provider_folder`: The path (relative or absolute) where provider information is stored.
+- `capif_host`: The domain name of the CAPIF host.
+- `register_host`: The domain name of the register host.
+- `capif_https_port`: The CAPIF host port number.
+- `capif_register_port`: The register host port number.
+- `capif_callback_url`: The URL used by CAPIF to send invoker notifications ([currently unavailable](sdk-issues.md)).
+- `cert_generation`: Fields for certificate generation, with `csr_country_name` requiring a two-letter country code.
+- `capif_username`: The CAPIF username.
+- `capif_password`: The CAPIF password.
+- `apfs`: The number of APFs to be onboarded as a provider (e.g., `5`).
+- `aefs`: The number of AEFs to be onboarded as a provider (e.g., `2`).
+- `debug_mode`: A boolean value to enable or disable SDK logs (e.g., `True` or `False`).
+- `discover_filter`: Fields for configuring invoker service discovery.
+- `publish_req`: Fields required for API publishing.
+- `api_description_path`: The path to the [ServiceAPIDescription](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Publish_Service_API.yaml) JSON file.
+- `check_authentication_data`: The `ip` and `port` of the target Provider's AEF to get their supported features from.
+
+
+
+## Important information for Provider consumers
+
+Within the `provider_folder`, the SDK stores the created folders named with prefix of the provided `capif_username` that has been registered from administrator. At each folder, there will be found the following files:
+
+- `provider_capif_ids.json`: contains all the APFs and AEFs ids that have already onboarded with this `capif_username`,
+- `capif_<api_name>_<api_id>.json`: if it is already published or updated an API, it will contain a copy of the last payload,
+- `service_received.json`: if it is already used to get an API or get all APIs functionality, it will contain the response of last request,
+- `provider_service_ids.json`: contains the currently published APIs with their `api_id`.
+
+All the configuration values are available within the object `capif_provider_connector`.
+
+The `provider_service_ids` variable stores the `provider_service_ids.json` content in a dictionary form.
+
+The `provider_capif_ids` variable stores the `provider_capif_ids.json` content in a dictionary form.
+
+## Important information for Invoker consumer
+
+In the `invoker_folder`, it will be located several folders with each `capif_username` it has been onboarded as a provider. For each folder, it will be found:
+
+- `capif_api_security_context_details.json`: This file contains the information of the invoker. It will contain:
+        
+    1. The `api_invoker_id`,
+    2. If the Service Discovery Functionality has already been used , it will be found all the available APIs with their information,
+    3. If the Service Get Token functionality has already been used , it will be found the access token for using the APIs that has already been discovered.
+
+The `token` variable is also available for retrieving the JWT token after the `get_tokens()` method.
+
+The `invoker_capif_details` variable stores the `capif_api_security_context_details.json` content in a dictionary form.
+
+## Openapi translation
+
+The `api_description_path` must point to the Publish API to be shared, and it should follow the [ServiceAPIDescription](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Publish_Service_API.yaml) schema.
+
+This schema could be obtained by applying this code.
+```python
+    import opencapif_sdk
+    
+    translator = api_schema_translator("./path/to/openapi.yaml")
+    translator.build("api_description_name",ip="0.0.0.0",port=9090)
+```
+This code will read `openapi.yaml`, ensure the structure of it and translate the content into ServiceAPIDescription schema, then will create a .json named `api_description_name`. Also it is necessary to fill the ip and port fields to create correctly the schema.
+# OpenCAPIF SDK known issues
+
+There are some features which **are not currently available at latest OpenCAPIF SDK release**. Those are assumed to be technical debt and might be available in future releases: 
+
+  - [CAPIF Access control policy management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Access_Control_Policy_API.yaml)
+  - [CAPIF Auditing API management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Auditing_API.yaml)
+  - [CAPIF Events API management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Events_API.yaml)
+  - [CAPIF Logging API management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Logging_API_Invocation_API.yaml)
+  - [CAPIF Routing info API management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Routing_Info_API.yaml)
+  - [CAPIF Security API management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Security_API.yaml)
+    - /trustedInvokers/{apiInvokerId}/delete (POST)
+    - /trustedInvokers/{apiInvokerId} (GET)
+    - /trustedInvokers/{apiInvokerId} (DELETE)

@@ -1,0 +1,71 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/24.7.17 Chrome/128.0.6613.36 Electron/32.0.1 Safari/537.36" version="24.7.17">
+  <diagram name="Página-1" id="t-nUy5kbwgH0i9l1b5A7">
+    <mxGraphModel dx="823" dy="1670" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="8sIIdbx3KEgpbh791dPz-15" value="" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#FFCCCC;fillColor=#FFCCCC;" vertex="1" parent="1">
+          <mxGeometry x="320" y="-710" width="120" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="KlneuS9EiLRrrpcz-7HY-5" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="KlneuS9EiLRrrpcz-7HY-1" target="KlneuS9EiLRrrpcz-7HY-4" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="KlneuS9EiLRrrpcz-7HY-20" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" parent="1" source="KlneuS9EiLRrrpcz-7HY-1" target="KlneuS9EiLRrrpcz-7HY-12" edge="1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="-735" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="KlneuS9EiLRrrpcz-7HY-1" value="" style="image;points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image=img/lib/allied_telesis/switch/Industrial_Ethernet_IE200.svg;" parent="1" vertex="1">
+          <mxGeometry x="360" y="-690" width="40.2" height="56.4" as="geometry" />
+        </mxCell>
+        <mxCell id="KlneuS9EiLRrrpcz-7HY-4" value="" style="image;points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image=img/lib/allied_telesis/computer_and_terminals/Server_Desktop.svg;" parent="1" vertex="1">
+          <mxGeometry x="500" y="-688.8000000000001" width="42.599999999999994" height="54" as="geometry" />
+        </mxCell>
+        <mxCell id="KlneuS9EiLRrrpcz-7HY-12" value="" style="image;points=[];aspect=fixed;html=1;align=center;shadow=0;dashed=0;image=img/lib/allied_telesis/media_converters/Media_Converter_Standalone.svg;" parent="1" vertex="1">
+          <mxGeometry x="228.71" y="-760" width="61.29" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="KlneuS9EiLRrrpcz-7HY-16" value="CAPIF" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="228.71" y="-790" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="KlneuS9EiLRrrpcz-7HY-17" value="AEFGW(Provider)" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" parent="1" vertex="1">
+          <mxGeometry x="320.1" y="-628.8000000000001" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8sIIdbx3KEgpbh791dPz-9" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="8sIIdbx3KEgpbh791dPz-4" target="8sIIdbx3KEgpbh791dPz-13">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="330" y="-660" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8sIIdbx3KEgpbh791dPz-4" value="Actor" style="shape=umlActor;verticalLabelPosition=bottom;verticalAlign=top;html=1;outlineConnect=0;" vertex="1" parent="1">
+          <mxGeometry x="80" y="-690.6" width="30" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8sIIdbx3KEgpbh791dPz-5" value="INVOKER" style="text;html=1;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fillColor=#B9E0A5;" vertex="1" parent="1">
+          <mxGeometry x="65" y="-630.5999999999999" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8sIIdbx3KEgpbh791dPz-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=-0.022;entryY=0.552;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="8sIIdbx3KEgpbh791dPz-4" target="KlneuS9EiLRrrpcz-7HY-12">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="95" y="-732" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="8sIIdbx3KEgpbh791dPz-11" value="REST" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="415.2" y="-690" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8sIIdbx3KEgpbh791dPz-12" value="&lt;font style=&quot;font-size: 8px;&quot;&gt;HTTP BASIC AUTH&lt;/font&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="400.2" y="-660.6" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="8sIIdbx3KEgpbh791dPz-13" value="NB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#CCE5FF;" vertex="1" parent="1">
+          <mxGeometry x="340" y="-690.6" width="20" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8sIIdbx3KEgpbh791dPz-14" value="SB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF2CC;" vertex="1" parent="1">
+          <mxGeometry x="380.2" y="-690.6" width="20" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="8sIIdbx3KEgpbh791dPz-16" value="Legacy System" style="whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="476.62" y="-620.6" width="89.35" height="20" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -1,0 +1,2 @@
+[console_scripts]
+aef_gw = aef_gw.cli:main

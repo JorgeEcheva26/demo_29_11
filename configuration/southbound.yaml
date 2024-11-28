@@ -1,0 +1,28 @@
+southbound:
+  ip: 0.0.0.0
+  port: 8000
+  type: REST
+  authentication_method: "HTTP Basic Authentication"
+  credentials:
+    username: "admin"
+    password: "password123"
+  paths:
+    - northbound_path: "/projects"
+      southbound_path: "/v1/resources"
+      method: GET
+    - northbound_path: "/projects"
+      southbound_path: "/v1/resources"
+      method: POST
+    - northbound_path: "/projects/{projectId}"
+      southbound_path: "/v1/resources/{resource_id}"
+      method: GET
+      parameters:
+        - projectId: resource_id
+    - northbound_path: "/tasks"
+      southbound_path: "/v1/resources/tasks"
+      method: POST
+    - northbound_path: "/users/{userId}/assignments"
+      southbound_path: "/v1/resources/users/{user_id}/information"
+      method: GET
+      parameters:
+        - userId: user_id

@@ -1,0 +1,322 @@
+northbound:
+  ip: 0.0.0.0
+  port: 3000
+  opencapif_sdk_configuration:
+    capif_host: "capif-prev.mobilesandbox.cloud"
+    register_host: "registercapif-prev.mobilesandbox.cloud"
+    capif_https_port: "36212"
+    capif_register_port: "36211"
+    capif_username: "echeva_0"
+    capif_password: "echevapass"
+    debug_mode: "False"
+    provider:
+      cert_generation:
+        csr_common_name: "provider"
+        csr_organizational_unit: "discovery"
+        csr_organization: "telefonica"
+        csr_locality: "madrid"
+        csr_state_or_province_name: "madrid"
+        csr_country_name: "ES"
+        csr_email_address: "hola@gmail.com"
+  openapi:
+    openapi: 3.0.3
+    info:
+      title: Project Management API
+      description: API para gestionar proyectos, tareas y recursos de una empresa.
+      version: 1.0.0
+      contact:
+        name: Support Team
+        url: https://support.example.com
+        email: support@example.com
+    paths:
+      /projects:
+        get:
+          summary: Obtener lista de proyectos
+          description: Devuelve una lista paginada de todos los proyectos
+          operationId: getProjects
+          tags:
+            - Projects
+          parameters:
+            - in: query
+              name: page
+              schema:
+                type: integer
+                default: 1
+              description: Página de resultados
+            - in: query
+              name: limit
+              schema:
+                type: integer
+                default: 10
+              description: Número de resultados por página
+          responses:
+            '200':
+              description: Lista de proyectos
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Project'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+            '500':
+              $ref: '#/components/responses/InternalServerError'
+        post:
+          summary: Crear un nuevo proyecto
+          description: Crea un nuevo proyecto con los datos especificados
+          operationId: createProject
+          tags:
+            - Projects
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/NewProject'
+          responses:
+            '201':
+              description: Proyecto creado correctamente
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Project'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+
+      /projects/{projectId}:
+        get:
+          summary: Obtener detalles de un proyecto
+          description: Devuelve los detalles de un proyecto específico por ID
+          operationId: getProject
+          tags:
+            - Projects
+          parameters:
+            - in: path
+              name: projectId
+              required: true
+              schema:
+                type: string
+              description: ID del proyecto
+          responses:
+            '200':
+              description: Detalles del proyecto
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Project'
+            '404':
+              $ref: '#/components/responses/NotFound'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+
+      /tasks:
+        post:
+          summary: Crear una nueva tarea
+          description: Asigna una nueva tarea a un proyecto existente
+          operationId: createTask
+          tags:
+            - Tasks
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  $ref: '#/components/schemas/NewTask'
+          responses:
+            '201':
+              description: Tarea creada
+              content:
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/Task'
+            '400':
+              $ref: '#/components/responses/BadRequest'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+
+      /users/{userId}/assignments:
+        get:
+          summary: Obtener tareas asignadas a un usuario
+          description: Lista todas las tareas asignadas a un usuario en particular
+          operationId: getUserAssignments
+          tags:
+            - Users
+          parameters:
+            - in: path
+              name: userId
+              required: true
+              schema:
+                type: string
+              description: ID del usuario
+          responses:
+            '200':
+              description: Lista de tareas asignadas al usuario
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/TaskAssignment'
+            '404':
+              $ref: '#/components/responses/NotFound'
+            '401':
+              $ref: '#/components/responses/Unauthorized'
+
+    components:
+      schemas:
+        Project:
+          type: object
+          properties:
+            id:
+              type: string
+              example: "project-1234"
+            name:
+              type: string
+              example: "Nuevo Proyecto"
+            description:
+              type: string
+              example: "Descripción detallada del proyecto"
+            startDate:
+              type: string
+              format: date
+              example: "2024-01-01"
+            endDate:
+              type: string
+              format: date
+              example: "2024-12-31"
+            status:
+              type: string
+              enum: [active, completed, on_hold]
+              example: "active"
+
+        NewProject:
+          type: object
+          required:
+            - name
+            - startDate
+            - endDate
+          properties:
+            name:
+              type: string
+              example: "Nuevo Proyecto"
+            description:
+              type: string
+              example: "Descripción detallada del proyecto"
+            startDate:
+              type: string
+              format: date
+              example: "2024-01-01"
+            endDate:
+              type: string
+              format: date
+              example: "2024-12-31"
+            status:
+              type: string
+              enum: [active, completed, on_hold]
+              example: "active"
+
+        Task:
+          type: object
+          properties:
+            id:
+              type: string
+              example: "task-5678"
+            title:
+              type: string
+              example: "Implementar API"
+            description:
+              type: string
+              example: "Desarrollar el endpoint para obtener lista de proyectos"
+            assignedTo:
+              type: string
+              example: "user-1234"
+            dueDate:
+              type: string
+              format: date
+              example: "2024-06-30"
+            status:
+              type: string
+              enum: [pending, in_progress, completed]
+              example: "pending"
+
+        NewTask:
+          type: object
+          required:
+            - title
+            - projectId
+          properties:
+            title:
+              type: string
+              example: "Implementar API"
+            description:
+              type: string
+              example: "Desarrollar el endpoint para obtener lista de proyectos"
+            projectId:
+              type: string
+              example: "project-1234"
+            assignedTo:
+              type: string
+              example: "user-1234"
+            dueDate:
+              type: string
+              format: date
+              example: "2024-06-30"
+
+        Error:
+          type: object
+          properties:
+            code:
+              type: integer
+              example: 400
+            message:
+              type: string
+              example: "Solicitud inválida"
+            details:
+              type: array
+              items:
+                type: string
+              example: ["El campo 'name' es requerido"]
+
+      responses:
+        Unauthorized:
+          description: Error de autenticación
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        BadRequest:
+          description: Datos de solicitud inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        NotFound:
+          description: Recurso no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        InternalServerError:
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+
+      securitySchemes:
+        ApiKeyAuth:
+          type: apiKey
+          in: header
+          name: X-API-KEY
+        BearerAuth:
+          type: http
+          scheme: bearer
+          bearerFormat: JWT
+
+    security:
+      - ApiKeyAuth: []
+      - BearerAuth: []
+
