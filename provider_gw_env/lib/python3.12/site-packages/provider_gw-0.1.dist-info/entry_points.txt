@@ -1,0 +1,2 @@
+[console_scripts]
+provider_gw = provider_gw.cli:main

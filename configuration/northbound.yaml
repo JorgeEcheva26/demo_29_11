@@ -18,6 +18,8 @@ northbound:
         csr_state_or_province_name: "madrid"
         csr_country_name: "ES"
         csr_email_address: "hola@gmail.com"
+      supported_features: "0"
+      apiSuppFeats: "0"
   openapi:
     openapi: 3.0.3
     info:

@@ -1,0 +1,97 @@
+{
+  "capif_host": "capif-prev.mobilesandbox.cloud",
+  "register_host": "registercapif-prev.mobilesandbox.cloud",
+  "capif_https_port": "36212",
+  "capif_register_port": "36211",
+  "capif_username": "echeva_0",
+  "capif_password": "echevapass",
+  "debug_mode": "True",
+  "invoker": {
+    "invoker_folder": "./invoker",
+    "capif_callback_url": "http://localhost:5000",
+    "supported_features": "fffffff",
+    "check_authentication_data": {
+      "ip": "",
+      "port": ""
+    },
+    "cert_generation": {
+      "csr_common_name": "Echeva",
+      "csr_organizational_unit": "discovery",
+      "csr_organization": "telefonica",
+      "csr_locality": "madrid",
+      "csr_state_or_province_name": "madrid",
+      "csr_country_name": "ES",
+      "csr_email_address": "adios@gmail.com"
+    },
+    "discover_filter": {
+      "api-name": "",
+      "api-version": "",
+      "comm-type": "",
+      "protocol": "",
+      "aef-id": "",
+      "data-format": "",
+      "api-cat": "",
+      "preferred-aef-loc": "",
+      "req-api-prov-name": "",
+      "supported-features": "",
+      "api-supported-features": "",
+      "ue-ip-addr": "",
+      "service-kpis": ""
+    },
+    "events": {
+      "description": ["SERVICE_API_AVAILABLE"],
+      "eventFilters": [
+        {
+          "apiIds": [""],
+          "apiInvokerIds": [""],
+          "aefIds": [""]
+        }
+      ]
+    }
+  },
+  "provider": {
+    "provider_folder": "/Users/IDB0128/Documents/OpenCapif/test_provider_certificate_folder",
+    "supported_features": "fffffff",
+    "cert_generation": {
+      "csr_common_name": "provider",
+      "csr_organizational_unit": "discovery",
+      "csr_organization": "telefonica",
+      "csr_locality": "madrid",
+      "csr_state_or_province_name": "madrid",
+      "csr_country_name": "ES",
+      "csr_email_address": "hola@gmail.com"
+    },
+    "apfs": "2",
+    "aefs": "3",
+    "publish_req": {
+      "service_api_id": "",
+      "publisher_apf_id": "",
+      "publisher_aefs_ids": ["", ""]
+    },
+    "api_description_path": "",
+    "events": {
+      "description": ["SERVICE_API_AVAILABLE"],
+      "eventFilters": [
+        {
+          "apiIds": [""],
+          "apiInvokerIds": [""],
+          "aefIds": [""]
+        }
+      ],
+      "notificationDestination" : "http://localhost:5000",
+      "websockNotifConfig": {
+        "websocketUri" : "http://localhost:5000",
+        "requestWebsocketUri": true
+      }
+    },
+    "log": {
+      "apiName": "Testtrece",
+      "apiVersion": "v1",
+      "resourceName": "MONITORING_SUBSCRIPTIONS",
+      "uri": "/{scsAsId}/subscriptions",
+      "protocol": "HTTP_2",
+      "operation": "GET",
+      "result": "200"
+    }
+  }
+}

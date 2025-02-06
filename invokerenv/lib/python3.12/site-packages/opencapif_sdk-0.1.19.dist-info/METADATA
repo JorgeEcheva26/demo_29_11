@@ -1,0 +1,266 @@
+Metadata-Version: 2.2
+Name: opencapif_sdk
+Version: 0.1.19
+Summary: This repository develops a Python Software Development Kit(SDK) which focuses on connecting to OpenCAPIF (Common API Framework for 3GPP Northbound APIs) in a simple way, lowering integration complexity and allowing developers to focus on Network Applications (Network Apps) or services development.
+Home-page: https://github.com/Telefonica/pesp_capif_sdk
+Author: JorgeEcheva, dgs-cgm
+Author-email: jorge.echevarriauribarri.practicas@telefonica.com, daniel.garciasanchez@telefonica.com
+License: LICENSE
+Keywords: pesp_capif_sdk,capif,sdk capif,opencapif_sdk
+Classifier: Programming Language :: Python :: 3
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+License-File: LICENSE
+Requires-Dist: requests==2.32.3
+Requires-Dist: PyYAML==6.0.1
+Requires-Dist: cryptography==38.0.4
+Requires-Dist: pyOpenSSL==22.1.0
+Requires-Dist: urllib3==2.2.2
+Requires-Dist: certifi==2024.7.4
+Requires-Dist: idna==3.7
+Requires-Dist: Flask==3.0.3
+Requires-Dist: Flask-JWT-Extended==4.6.0
+Requires-Dist: Jinja2==3.1.4
+Requires-Dist: MarkupSafe==2.1.5
+Requires-Dist: six==1.16.0
+Requires-Dist: typing-extensions>=4.8.0
+Requires-Dist: Werkzeug==3.0.4
+Requires-Dist: pytest==8.3.2
+Requires-Dist: flake8==3.9.2
+Requires-Dist: coverage==4.5.4
+Requires-Dist: mccabe==0.6.1
+Requires-Dist: pycodestyle==2.7.0
+Requires-Dist: pyflakes==2.3.1
+Requires-Dist: python-dateutil==2.9.0.post0
+Requires-Dist: jinja2-time==0.2.0
+Requires-Dist: text-unidecode==1.3
+Requires-Dist: binaryornot==0.4.4
+Dynamic: author
+Dynamic: author-email
+Dynamic: classifier
+Dynamic: description
+Dynamic: description-content-type
+Dynamic: home-page
+Dynamic: keywords
+Dynamic: license
+Dynamic: requires-dist
+Dynamic: requires-python
+Dynamic: summary
+
+# OpenCAPIF SDK
+
+This repository develops a Python Software Development Kit(SDK) which focuses on connecting to OpenCAPIF (Common API Framework for 3GPP Northbound APIs) in a simple way, lowering integration complexity and allowing developers to focus on Network Applications (Network Apps) or services development. 
+
+OpenCAPIF SDK provides a set of libraries to enable either CAPIF provider and invoker roles, and other functions to simplify procedures calls towards OpenCAPIF entity.
+
+Current version of OpenCAPIF SDK is compatible with following publicly available releases:
+- [OpenCAPIF Release 1.0](https://ocf.etsi.org/documentation/v1.0.0-release/)
+- OpenCAPIF Release 2.0
+
+# Network App developers
+
+In the scope of CAPIF, a Network App (Network Application) refers to an external application or service that interacts with the 3GPP network via standardized APIs. These Network Apps typically leverage the capabilities and services provided by the underlying mobile network infrastructure, such as network slicing, quality of service (QoS), or location services.
+
+Network Apps can be developed by third-party service providers, network operators, or other stakeholders to offer a wide range of services, including enhanced communication features, IoT solutions, or content delivery, and they use CAPIF as the unified framework for securely discovering, accessing, and utilizing 3GPP network APIs.
+
+For that purpose Network Apps play 2 different roles when interacting with CAPIF:
+- **Invoker**: a Network App acting as an Invoker is responsible for consuming APIs exposed by other services. This role represents an external application or service that  calls the 3GPP northbound APIs to utilize the network’s functionalities.
+
+- **Provider**: a Network App acting as a Provider is responsible for exposing its own APIs/services for use by Invokers. This role represents an entity that offers services through APIs, making them available to other external applications or Invokers.A provider also is distinguished for having three parts.
+
+  - The **AMF (API Management Function)**, supplies the API provider domain with administrative capabilities. Some of these capabilities include, auditing the service API invocation logs received from the CCF, on-boarding/off-boarding new API invokers and monitoring the status of the service APIs.One provider can have only one AMF.
+
+  - The **APF (API Publishing Function)**, is responsible for the publication of the service APIs to CCF in order to enable the discovery capability to the API Invokers.One provider can have multiple APFs.
+
+  - The **AEF (API Exposing Function)**, is responsible for the exposure of the service APIs. Assuming that API Invokers are authorized by the CCF, AEF validates the authorization and subsequently provides the direct communication entry points to the service APIs. AEF may also authorize API invokers and record the invocations in log files.One provider can have multiple AEFs
+
+OpenCAPIF SDK brings a set of functions to integrate with the 5G Core's function CAPIF, as defined in [3GPP Technical Specification (TS) 29.222 V18.5.0 Common API Framework for 3GPP Northbound APIs](https://www.etsi.org/deliver/etsi_ts/129200_129299/129222/18.05.00_60/ts_129222v180500p.pdf). This section shows the mapping between the Python functions available in this SDK and the CAPIF OpenAPI APIs defined the reference standard:
+
+| **3GPP CAPIF API**                                    | **OpenCAPIF SDK function**                                  | **Description**                                             |
+|-------------------------------------------------------|-------------------------------------------------------------|-------------------------------------------------------------|
+| /onboardedInvokers (POST)                             | [onboard_invoker()](./doc/sdk_full_documentation.md#invoker-onboarding)                                           | Registers a new invoker.                                    |
+| /onboardedInvokers/{onboardingId} (PUT)               | [update_invoker()](./doc/sdk_full_documentation.md#update-and-offboard-invoker)                                          | Updates an existing invoker for a specific `onboardingId`.                                |
+| /onboardedInvokers/{onboardingId} (DELETE)            | [offboard_invoker()](./doc/sdk_full_documentation.md#update-and-offboard-invoker)                                         | Deletes an invoker for a specific `onboardingId`.                                         |
+| registrations (POST)                                  | [onboard_provider()](./doc/sdk_full_documentation.md#provider-onboarding)                                          | Registers a new service provider.                           |
+| /registrations/{registrationId} (PUT)                 | [update_provider()](./doc/sdk_full_documentation.md#update-and-offboard-provider)                                           | Updates a service provider's registration for a specific `registrationId`.                  |
+| /registrations/{registrationId} (DELETE)              | [offboard_provider()](./doc/sdk_full_documentation.md#update-and-offboard-provider)                                         | Deletes a service provider's registration for a specific `registrationId`.                  |
+| /allServiceAPIs (GET)                                 | [discover()](./doc/sdk_full_documentation.md#discover-process)                                                  | Retrieves a list of all available service APIs.             |
+| /trustedInvokers (PUT//POST)                          | [get_tokens()](./doc/sdk_full_documentation.md#discover-process)                                                  | Registers or updates trusted invokers.                      |
+| /securities/{securityId}/token (GET)                  | [get_tokens()](./doc/sdk_full_documentation.md#obtain-invoker-tokens)                                                | Retrieves a security token for a specific `securityId`. This JWT token is used to query the targeted services.      |
+| /{apfId}/service-apis(POST)                           | [publish_services()](./doc/sdk_full_documentation.md#services-publishing)                                          | Registers a new service API into the system for a specific `apfId`                |
+| /{apfId}/service-apis/{serviceApiId} (DELETE)         | [unpublish_service()](./doc/sdk_full_documentation.md#services-deletion)                                         | Deletes a service API from the system for a specific `apfId`and `serviceApiId`                      |
+| /{apfId}/service-apis/{serviceApiId} (PUT)            | [update_service()](./doc/sdk_full_documentation.md#services-update)                                            | Updates the details of an existing service API for a specific `apfId`and `serviceApiId`             |
+| /{apfId}/service-apis/{serviceApiId} (GET)                           | [get_service()](./doc/sdk_full_documentation.md#get-services)                                               | Retrieves the details of a specific service API for a specific `apfId` and `serviceApiId`           |
+| /{apfId}/service-apis (GET)            | [get_all_services()](./doc/sdk_full_documentation.md#get-all-services)                                          | Retrieves a list of all available service APIs for a specific `apfId`            |
+| /aef-security/v1/check-authentication (POST)            | [check_authentication()](./doc/sdk_full_documentation.md#check_authentication)                                          | This custom operation allows the API invoker to confirm the `supported_features` from the API exposing function(AEF)            |
+| /api-invocation-logs/v1/{aefId}/logs (POST)             | [create_logs( aefId, api_invoker_id)](./doc/sdk_full_documentation.md#create_logs) | This operation allows to the Provider to notice to the CCF about the query of an invoker for an especific `aefId`
+| /capif-events/v1/{subscriberId}/subscriptions (POST)             | [create_subscription(name, id)](./doc/sdk_full_documentation.md#create_subscription) | This operation allows to the Invoker/AEF/APF/AMF to ask to the CCF about notifications related to certain functionalities.
+| /capif-events/v1/{subscriberId}/subscriptions/{subscriptionId} (DELETE)             | [delete_subscription(name, id)](./doc/sdk_full_documentation.md#delete_subscription) | This operation allows to the Invoker/AEF/APF/AMF to withdraw the petition to receive notifications related to certain functionalities.
+| /capif-events/v1/{subscriberId}/subscriptions/{subscriptionId} (PUT)             | [update_subscription(name, id)](./doc/sdk_full_documentation.md#update_subscription) | This operation allows to the Invoker/AEF/APF/AMF to modify to the petition to receive notifications related to certain functionalities. **ONLY AVAILABLE IN OPENCAPIF RELEASE 2**
+| /capif-events/v1/{subscriberId}/subscriptions/{subscriptionId} (PATCH)             | [patch_subscription(name, id)](./doc/sdk_full_documentation.md#patch_subscription) | This operation allows to the Invoker/AEF/APF/AMF to modify to the petition to receive notifications related to certain functionalities. **ONLY AVAILABLE IN OPENCAPIF RELEASE 2**
+
+NOTE: Above mentioned CAPIF APIs are defined in these 3GPP references:
+- [CAPIF Invoker API specification](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_API_Invoker_Management_API.yaml)
+- [CAPIF Provider API specification](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_API_Provider_Management_API.yaml)
+- [CAPIF Discover API specification](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Discover_Service_API.yaml)
+- [CAPIF Publish API specification](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Publish_Service_API.yaml) 
+- [CAPIF Security API specification](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Security_API.yaml)
+- [AEF Security API specification](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_AEF_Security_API.yaml)
+- [CAPIF Logging API management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Logging_API_Invocation_API.yaml)
+- [CAPIF Events API management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Events_API.yaml)
+NOTE: In the [3GPP Technical Specification (TS) 29.222 V18.5.0 Common API Framework for 3GPP Northbound APIs](https://www.etsi.org/deliver/etsi_ts/129200_129299/129222/18.05.00_60/ts_129222v180500p.pdf) the `service` concept is understood as equal as the `API` concept.
+
+## OpenCAPIF SDK requirements
+
+To use the OpenCAPIF SDK, a registered user account within the target CAPIF instance is required. 
+
+**Contact the administrator to obtain the required predefined credentials (CAPIF username and password).**
+
+## OpenCAPIF SDK installation
+
+To use the SDK, binary installer for the latest version is available at the [Python Package Index (Pipy)](https://pypi.org/project/opencapif-sdk/)
+
+```console
+pip install opencapif_sdk
+```
+## Configuration via `capif_sdk_config.json`
+
+### Common Fields for Invoker and Provider
+
+Regardless of the role (Invoker or Provider), the following fields are mandatory:
+
+- `capif_host`
+- `register_host`
+- `capif_https_port`
+- `capif_register_port`
+- `capif_username`
+- `capif_password`
+- `debug_mode`
+
+### Network App Invoker
+
+When configuring the SDK as a **Network App Invoker**, the following fields must be provided:
+
+- `invoker_folder`
+- `capif_callback_url`
+- `supported_features`
+- `cert_generation` (fields such as `csr_common_name`, `csr_country_name`, etc.)
+
+**Optional:**
+- `discover_filter`: useful to enable the discovery of specific APIs. Some fields under `discover_filter` structure required to be configured when using discovery filters. Check devoted section below,
+- `check_authentication_data`: useful to use `check_authentication()` function to validate features from a target provider, it will be required to fill up the `ip` and `port` parameters within the `check_authentication_data` variable.
+
+### Network App Provider
+
+For SDK configuration as a **Network App Provider**, the following fields are required:
+
+- `provider_folder`
+- `suported_features`
+- `cert_generation` (fields such as `csr_common_name`, `csr_country_name`, etc.)
+- `APFs`
+- `AEFs`
+- `publish_req`
+- `api_description_path`
+
+## Configuration of `discover_filter`
+
+The `discover_filter` section adheres to the parameters defined in the GET request schema of the [Discover Services API](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Discover_Service_API.yaml).
+
+To use the service discovery functionality, the `discover_filter` fields should be populated with the desired filters. **It is important to note that fields such as `api-name` must contain only one entry of each type (i.e., no lists are allowed in api-name).**
+
+For instance if the invoker fill the `api-name` field, the `discover()` functionality will retrieve only one API, the one that matches the exact name of the `api-name`.
+
+Before running the Invoker Service Discovery Functionality, the Invoker must be onboarded to CAPIF.
+
+## Configuration of `publish_req`
+
+This section is mandatory when using the [CAPIF Publish Service API](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Publish_Service_API.yaml). The following fields are required:
+
+- `service_api_id`: Example: `"02eff6e1b3a8f7c8044a92ee8a30bd"`
+- `publisher_apf_id`: Example: `"APFa165364a379035d14311deadc04332"`
+- `publisher_aefs_ids`: An array of selected AEF IDs. Example: `["AEFfa38f0e855bffb420e4994ecbc8fb9", "AEFe8bfa711f4f0c95ba0b382508e6382"]`
+
+The `api_description_path` must point to the Publish API to be shared, and it should follow the [ServiceAPIDescription](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Publish_Service_API.yaml) schema.
+
+To obtain this schema, opencapif_sdk has a facility to translate Openapi structures to ServiceAPIDescription schemas.
+
+If the `publisher_aefs_ids` do not match the `aefProfiles` in the API description, an error will be raised by the SDK.
+
+## Descriptions of `capif_sdk_config` Fields
+
+- `invoker_folder`: The path (relative or absolute) where invoker information (certificates, keys, etc.) is stored.
+- `provider_folder`: The path (relative or absolute) where provider information is stored.
+- `supported_features`: A string used to indicate the features supported by an API. The string shall contain a bitmask indicating supported features in hexadecimal representation Each character in the string shall take a value of "0" to "9", "a" to "f" or "A" to "F". [More information](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29571_CommonData.yaml)
+- `capif_host`: The domain name of the CAPIF host.
+- `register_host`: The domain name of the register host.
+- `capif_https_port`: The CAPIF host port number.
+- `capif_register_port`: The register host port number.
+- `capif_callback_url`: The URL used by CAPIF to send invoker notifications ([currently unavailable](sdk-issues.md)).
+- `cert_generation`: Fields for certificate generation, with `csr_country_name` requiring a two-letter country code.
+- `capif_username`: The CAPIF username.
+- `capif_password`: The CAPIF password.
+- `apfs`: The number of APFs to be onboarded as a provider (e.g., `5`).
+- `aefs`: The number of AEFs to be onboarded as a provider (e.g., `2`).
+- `debug_mode`: A boolean value to enable or disable SDK logs (e.g., `True` or `False`).
+- [`discover_filter`](#configuration-of-discover_filter): Fields for configuring invoker service discovery.
+- [`publish_req`](#configuration-of-publish_req): Fields required for API publishing.
+- `api_description_path`: The path to the [ServiceAPIDescription](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Publish_Service_API.yaml) JSON file.
+- `check_authentication_data`: The `ip` and `port` of the target Provider's AEF to get their supported features from.
+
+
+
+## Important information for Provider consumers
+
+Within the `provider_folder`, the SDK stores the created folders named with prefix of the provided `capif_username` that has been registered from administrator. At each folder, there will be found the following files:
+
+- `provider_capif_ids.json`: contains all the APFs and AEFs ids that have already onboarded with this `capif_username`,
+- `capif_<api_name>_<api_id>.json`: if it is already published or updated an API, it will contain a copy of the last payload,
+- `service_received.json`: if it is already used to get an API or get all APIs functionality, it will contain the response of last request,
+- `provider_service_ids.json`: contains the currently published APIs with their `api_id`.
+
+All the configuration values are available within the object `capif_provider_connector`.
+
+The `provider_service_ids` variable stores the `provider_service_ids.json` content in a dictionary form.
+
+The `provider_capif_ids` variable stores the `provider_capif_ids.json` content in a dictionary form.
+
+## Important information for Invoker consumer
+
+In the `invoker_folder`, it will be located several folders with each `capif_username` it has been onboarded as a provider. For each folder, it will be found:
+
+- `capif_api_security_context_details.json`: This file contains the information of the invoker. It will contain:
+        
+    1. The `api_invoker_id`,
+    2. If the Service Discovery Functionality has already been used , it will be found all the available APIs with their information,
+    3. If the Service Get Token functionality has already been used , it will be found the access token for using the APIs that has already been discovered.
+
+The `token` variable is also available for retrieving the JWT token after the `get_tokens()` method.
+
+The `invoker_capif_details` variable stores the `capif_api_security_context_details.json` content in a dictionary form.
+
+## Openapi translation
+
+The `api_description_path` must point to the Publish API to be shared, and it should follow the [ServiceAPIDescription](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Publish_Service_API.yaml) schema.
+
+This schema could be obtained by applying this code.
+```python
+    import opencapif_sdk
+    
+    translator = api_schema_translator("./path/to/openapi.yaml")
+    translator.build("api_description_name",ip="0.0.0.0",port=9090)
+```
+This code will read `openapi.yaml`, ensure the structure of it and translate the content into ServiceAPIDescription schema, then will create a .json named `api_description_name`. Also it is necessary to fill the ip and port fields to create correctly the schema.
+# OpenCAPIF SDK known issues
+
+There are some features which **are not currently available at latest OpenCAPIF SDK release**. Those are assumed to be technical debt and might be available in future releases: 
+
+  - [CAPIF Access control policy management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Access_Control_Policy_API.yaml)
+  - [CAPIF Auditing API management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Auditing_API.yaml)
+  - [CAPIF Events API management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Events_API.yaml)
+  - [CAPIF Logging API management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Logging_API_Invocation_API.yaml)
+  - [CAPIF Routing info API management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Routing_Info_API.yaml)
+  - [CAPIF Security API management](https://github.com/jdegre/5GC_APIs/blob/Rel-18/TS29222_CAPIF_Security_API.yaml)
+    - /trustedInvokers/{apiInvokerId}/delete (POST)
+    - /trustedInvokers/{apiInvokerId} (GET)
+    - /trustedInvokers/{apiInvokerId} (DELETE)
