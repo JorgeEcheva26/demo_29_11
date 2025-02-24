@@ -1,5 +1,5 @@
 northbound:
-  ip: 0.0.0.0
+  ip: 192.168.24.139
   port: 3000
   opencapif_sdk_configuration:
     capif_host: "capif-prev.mobilesandbox.cloud"
@@ -11,311 +11,175 @@ northbound:
     debug_mode: "True"
     provider:
       cert_generation:
-        csr_common_name: "provider"
+        csr_common_name: "RISComponent_provider"
         csr_organizational_unit: "discovery"
         csr_organization: "telefonica"
         csr_locality: "madrid"
         csr_state_or_province_name: "madrid"
         csr_country_name: "ES"
-        csr_email_address: "hola@gmail.com"
+        csr_email_address: "jorge.echevarriauribarri.practicas@telefonica.es"
       supported_features: "0"
       apiSuppFeats: "0"
   openapi:
-    openapi: 3.0.3
+    openapi: 3.0.0
     info:
-      title: Project Management API
-      description: API para gestionar proyectos, tareas y recursos de una empresa.
-      version: 1.0.0
-      contact:
-        name: Support Team
-        url: https://support.example.com
-        email: support@example.com
+      title: RIS Sandbox API
+      version: 5.0
+      description: API for configuring and controlling the RIS component.
     paths:
-      /projects:
-        get:
-          summary: Obtener lista de proyectos
-          description: Devuelve una lista paginada de todos los proyectos
-          operationId: getProjects
-          tags:
-            - Projects
-          parameters:
-            - in: query
-              name: page
-              schema:
-                type: integer
-                default: 1
-              description: Página de resultados
-            - in: query
-              name: limit
-              schema:
-                type: integer
-                default: 10
-              description: Número de resultados por página
-          responses:
-            '200':
-              description: Lista de proyectos
-              content:
-                application/json:
-                  schema:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/Project'
-            '401':
-              $ref: '#/components/responses/Unauthorized'
-            '500':
-              $ref: '#/components/responses/InternalServerError'
+      /api/set_codebook:
         post:
-          summary: Crear un nuevo proyecto
-          description: Crea un nuevo proyecto con los datos especificados
-          operationId: createProject
-          tags:
-            - Projects
+          summary: Creates a set of custom profiles for the RIS.
           requestBody:
             required: true
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/NewProject'
-          responses:
-            '201':
-              description: Proyecto creado correctamente
-              content:
-                application/json:
-                  schema:
-                    $ref: '#/components/schemas/Project'
-            '400':
-              $ref: '#/components/responses/BadRequest'
-            '401':
-              $ref: '#/components/responses/Unauthorized'
-
-      /projects/{projectId}:
-        get:
-          summary: Obtener detalles de un proyecto
-          description: Devuelve los detalles de un proyecto específico por ID
-          operationId: getProject
-          tags:
-            - Projects
-          parameters:
-            - in: path
-              name: projectId
-              required: true
-              schema:
-                type: string
-              description: ID del proyecto
+                  type: object
+                  properties:
+                    ip_address:
+                      type: string
+                      description: IP address of RIS
+                    f0:
+                      type: number
+                      format: float
+                      description: Frequency (GHz)
+                      minimum: 26.5
+                      maximum: 29.5
+                    dist:
+                      type: number
+                      format: float
+                      description: Distance (m)
+                      minimum: 0
+                    phi_t:
+                      type: number
+                      format: float
+                      description: Incident angle azimuth (degrees)
+                      minimum: 0
+                      maximum: 360
+                    theta_t:
+                      type: number
+                      format: float
+                      description: Incident angle polar (degrees)
+                      minimum: 0
+                      maximum: 90
+                    num_phi_r:
+                      type: integer
+                      description: Number of azimuth segments
+                      minimum: 1
+                    phi_r_low:
+                      type: number
+                      format: float
+                      description: Receiver azimuth low (degrees)
+                      minimum: 0
+                      maximum: 360
+                    phi_r_high:
+                      type: number
+                      format: float
+                      description: Receiver azimuth high (degrees)
+                      minimum: 0
+                      maximum: 360
+                    num_theta_r:
+                      type: integer
+                      description: Number of polar segments
+                      minimum: 1
+                    theta_r_low:
+                      type: number
+                      format: float
+                      description: Receiver polar low (degrees)
+                      minimum: 0
+                      maximum: 90
+                    theta_r_high:
+                      type: number
+                      format: float
+                      description: Receiver polar high (degrees)
+                      minimum: 0
+                      maximum: 90
           responses:
             '200':
-              description: Detalles del proyecto
+              description: Code book created successfully
               content:
                 application/json:
                   schema:
-                    $ref: '#/components/schemas/Project'
-            '404':
-              $ref: '#/components/responses/NotFound'
-            '401':
-              $ref: '#/components/responses/Unauthorized'
+                    type: object
+                    properties:
+                      message:
+                        type: string
 
-      /tasks:
+      /api/apply_dual_pol_ris_profile:
         post:
-          summary: Crear una nueva tarea
-          description: Asigna una nueva tarea a un proyecto existente
-          operationId: createTask
-          tags:
-            - Tasks
+          summary: Applies a dual-polarization profile to the RIS.
           requestBody:
             required: true
             content:
               application/json:
                 schema:
-                  $ref: '#/components/schemas/NewTask'
-          responses:
-            '201':
-              description: Tarea creada
-              content:
-                application/json:
-                  schema:
-                    $ref: '#/components/schemas/Task'
-            '400':
-              $ref: '#/components/responses/BadRequest'
-            '401':
-              $ref: '#/components/responses/Unauthorized'
-
-      /users/{userId}/assignments:
-        get:
-          summary: Obtener tareas asignadas a un usuario
-          description: Lista todas las tareas asignadas a un usuario en particular
-          operationId: getUserAssignments
-          tags:
-            - Users
-          parameters:
-            - in: path
-              name: userId
-              required: true
-              schema:
-                type: string
-              description: ID del usuario
+                  type: object
+                  properties:
+                    ip_address:
+                      type: string
+                      description: IP address of RIS
+                    vert_profile_id:
+                      type: integer
+                      description: Profile ID for vertical polarization
+                      minimum: 0
+                      maximum: 999
+                    horz_profile_id:
+                      type: integer
+                      description: Profile ID for horizontal polarization
+                      minimum: 0
+                      maximum: 999
           responses:
             '200':
-              description: Lista de tareas asignadas al usuario
+              description: Profiles applied successfully
               content:
                 application/json:
                   schema:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/TaskAssignment'
-            '404':
-              $ref: '#/components/responses/NotFound'
-            '401':
-              $ref: '#/components/responses/Unauthorized'
+                    type: object
+                    properties:
+                      message:
+                        type: string
 
-    components:
-      schemas:
-        Project:
-          type: object
-          properties:
-            id:
-              type: string
-              example: "project-1234"
-            name:
-              type: string
-              example: "Nuevo Proyecto"
-            description:
-              type: string
-              example: "Descripción detallada del proyecto"
-            start_date:
-              type: string
-              format: date
-              example: "2024-01-01"
-            end_date:
-              type: string
-              format: date
-              example: "2024-12-31"
-            status:
-              type: string
-              example: "active"
+      /api/apply_ris_profile:
+        post:
+          summary: Applies a profile to the RIS.
+          requestBody:
+            required: true
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    ip_address:
+                      type: string
+                      description: IP address of RIS
+                    profile_id:
+                      type: integer
+                      description: Profile ID
+                      minimum: 0
+                      maximum: 999
+          responses:
+            '200':
+              description: Profile applied successfully
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message:
+                        type: string
 
-        NewProject:
-          type: object
-          required:
-            - name
-            - start_date
-            - end_date
-          properties:
-            name:
-              type: string
-              example: "Nuevo Proyecto"
-            description:
-              type: string
-              example: "Descripción detallada del proyecto"
-            start_date:
-              type: string
-              format: date
-              example: "2024-01-01"
-            end_date:
-              type: string
-              format: date
-              example: "2024-12-31"
-            status:
-              type: string
-              example: "active"
-
-        Task:
-          type: object
-          properties:
-            id:
-              type: string
-              example: "task-5678"
-            name:
-              type: string
-              example: "Implementar API"
-            description:
-              type: string
-              example: "Desarrollar el endpoint para obtener lista de proyectos"
-            assigned_to:
-              type: string
-              example: "user-1234"
-            due_date:
-              type: string
-              format: date
-              example: "2024-06-30"
-            status:
-              type: string
-              example: "pending"
-
-        NewTask:
-          type: object
-          required:
-            - title
-            - resource_id
-          properties:
-            title:
-              type: string
-              example: "Implementar API"
-            description:
-              type: string
-              example: "Desarrollar el endpoint para obtener lista de proyectos"
-            resource_id:
-              type: string
-              example: "project-1234"
-            assigned_to:
-              type: string
-              example: "user-1234"
-            due_date:
-              type: string
-              format: date
-              example: "2024-06-30"
-
-        Error:
-          type: object
-          properties:
-            code:
-              type: integer
-              example: 400
-            message:
-              type: string
-              example: "Solicitud inválida"
-            details:
-              type: array
-              items:
-                type: string
-              example: ["El campo 'name' es requerido"]
-
-      responses:
-        Unauthorized:
-          description: Error de autenticación
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        BadRequest:
-          description: Datos de solicitud inválidos
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        NotFound:
-          description: Recurso no encontrado
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-        InternalServerError:
-          description: Error interno del servidor
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error'
-
-      securitySchemes:
-        ApiKeyAuth:
-          type: apiKey
-          in: header
-          name: X-API-KEY
-        BearerAuth:
-          type: http
-          scheme: bearer
-          bearerFormat: JWT
-
-    security:
-      - ApiKeyAuth: []
-      - BearerAuth: []
+      /api/get_ris_info:
+        get:
+          summary: Retrieves RIS information and status.
+          responses:
+            '200':
+              description: RIS information retrieved successfully
+              content:
+                application/json:
+                  schema:
+                    type: object
+                    properties:
+                      message:
+                        type: string
 

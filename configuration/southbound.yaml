@@ -1,28 +1,21 @@
 southbound:
-  ip: 0.0.0.0
-  port: 8000
+  ip: 52.17.22.101
+  port: 80
   type: REST
   authentication_method: "HTTP Basic Authentication"
   credentials:
-    username: "admin"
-    password: "password123"
+    username: ""
+    password: ""
   paths:
-    - northbound_path: "/projects"
-      southbound_path: "/v1/resources"
-      method: GET
-    - northbound_path: "/projects"
-      southbound_path: "/v1/resources"
+    - northbound_path: "/api/set_codebook"
+      southbound_path: "/api/set_codebook"
       method: POST
-    - northbound_path: "/projects/{projectId}"
-      southbound_path: "/v1/resources/{resource_id}"
-      method: GET
-      parameters:
-        - projectId: resource_id
-    - northbound_path: "/tasks"
-      southbound_path: "/v1/resources/tasks"
+    - northbound_path: "/api/apply_dual_pol_ris_profile"
+      southbound_path: "/api/apply_dual_pol_ris_profile"
       method: POST
-    - northbound_path: "/users/{userId}/assignments"
-      southbound_path: "/v1/resources/users/{user_id}/information"
+    - northbound_path: "/api/apply_ris_profile"
+      southbound_path: "/api/apply_ris_profile"
+      method: POST
+    - northbound_path: "/api/get_ris_info"
+      southbound_path: "/api/get_ris_info"
       method: GET
-      parameters:
-        - userId: user_id
